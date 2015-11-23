@@ -25,6 +25,12 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-1.0-sdk</artifactId>
+			<version>1.9.28</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
@@ -49,13 +55,44 @@
 			<artifactId>geronimo-jpa_3.0_spec</artifactId>
 			<version>1.1.1</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-stubs</artifactId>
+			<version>1.9.28</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<version>3.1</version>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.google.appengine</groupId>
+				<artifactId>appengine-maven-plugin</artifactId>
+				<version>1.9.28</version>
+				<configuration>
+					<enableJarClasses>false</enableJarClasses>
+					<!-- Uncomment in the below snippet to bind to all IPs instead of just localhost -->
+					<!-- address>0.0.0.0</address>
+                    <port>8080</port -->
+					<!-- Comment in the below snippet to disable local debugging with a remove debugger
+                         like those included with Eclipse or IntelliJ -->
+					<jvmFlags>
+                      <jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n</jvmFlag>
+                    </jvmFlags>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

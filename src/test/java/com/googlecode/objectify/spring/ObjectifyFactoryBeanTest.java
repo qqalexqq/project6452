@@ -46,7 +46,7 @@ public class ObjectifyFactoryBeanTest {
         
         Class<?> clazz = Car.class; // Car is annotated with javax.persistence.Entity
         assertNotNull(objectifyFactory.getMetadata(clazz));
-        assertNotNull(clazz.getAnnotation(javax.persistence.Entity.class));
+        assertNotNull(clazz.getAnnotation(com.googlecode.objectify.annotation.Entity.class));
     }
     
     @Test
