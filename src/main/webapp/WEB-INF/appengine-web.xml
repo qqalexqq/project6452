@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+
+    <application>project-645-2</application>
+    <version>alpha-001</version>
+
+    <sessions-enabled>true</sessions-enabled>
+    <threadsafe>true</threadsafe>
+
+    <static-files>
+        <include path="**" expiration="14d" />
+        <exclude path="/META-INF/**" />
+    </static-files>
+
+    <resource-files>
+    </resource-files>
+
+    <system-properties>
+        <property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />
+    </system-properties>
+
+    <admin-console>
+        <page name="Admin page" url="/admin" />
+    </admin-console>
+
+    <static-error-handlers>
+    </static-error-handlers>
+
+</appengine-web-app>
