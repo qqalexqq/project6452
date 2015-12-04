@@ -1,37 +1,29 @@
 package entities;
 
-import java.util.Set;
+import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
+import com.googlecode.objectify.Ref;
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
+import com.googlecode.objectify.annotation.Parent;
 
 @Entity
-@Table(name="Conference")
 public class Conference {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
-	@Column(name="topic")
-	private String topic;
-	// DATE + HOUR
+	@Id Long id ; 
+	@Index private String topic;
+	@Index private Date date;
 	
 	
 	//relations
-	@OneToOne
-	@JoinColumn(name = "room_fk",nullable = false) 
-	private Room room ;
-	@OneToMany
-	private Set<Speaker> Speakers	 ;
+	// @Load @Parent private List<Ref<Speaker>> speakers;
+	 	@Parent private Ref<Room> room ; 	 
 	
+	
+	public Conference() {
+		
+	}
 	public String getTopic() {
 		return topic;
 	}
@@ -41,7 +33,25 @@ public class Conference {
 	public Long getId() {
 		return id;
 	}
-	
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+//	public List<Ref<Speaker>> getSpeakers() {
+//		return speakers;
+//	}
+//	public void setSpeakers(List<Ref<Speaker>> speakers) {
+//		this.speakers = speakers;
+//	}
+	public Ref<Room> getRoom() {
+		return room;
+	}
+	public void setRoom(Ref<Room> room) {
+		this.room = room;
+	}
+
 	
 	
 

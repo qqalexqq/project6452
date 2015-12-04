@@ -1,27 +1,19 @@
 package entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.googlecode.objectify.annotation.*;
 
 
 @Entity
-@Table(name="Room")
 public class Room {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
-	@Column(name="building")
-	private String building;
-	@Column(name="number")
-	private int number;
+	@Id Long id ; 
+	@Index private String building;
+	@Index private int number;
 	
 	
-	
+	public Room ()  {
+		
+	}
 	public String getBuilding() {
 		return building;
 	}

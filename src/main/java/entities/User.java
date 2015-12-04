@@ -1,27 +1,23 @@
-package entities;
+	package entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+import com.googlecode.objectify.annotation.*;
 
 @Entity
-@Table(name="User")
 public class User {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
-	@Column(name="username")
-	private String username;
-	@Column(name="password")
-	private String password;
+	@Id Long id ; 
+	@Index private String username;
+	@Index private String password;
 	
 	
+	public User () {
+		
+	}
 	
+	public User(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
 	public String getUsername() {
 		return username;
 	}
@@ -34,9 +30,8 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Long getId() {
+	public Long getID() {
 		return id;
 	}
-	
 	
 }

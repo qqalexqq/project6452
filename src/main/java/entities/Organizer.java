@@ -1,25 +1,18 @@
 package entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
+import com.googlecode.objectify.annotation.*;
 @Entity
-@Table(name="Organizer")
 public class Organizer {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
-	@Column(name="firstname")
-	private String firstname;
-	@Column(name="lastname")
-	private String lastname;
+	@Id Long id ; 
+	@Index private String firstname;
+	@Index private String lastname;
 	
 	
+	public Organizer (){
+		
+	}
 	
 	public String getFirstname() {
 		return firstname;

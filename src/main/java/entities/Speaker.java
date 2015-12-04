@@ -1,30 +1,21 @@
 package entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.googlecode.objectify.annotation.*;;
 
 
 @Entity
-@Table(name="Speaker")
 public class Speaker {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
-	@Column(name="firstname")
-	private String firstname;
-	@Column(name="lastname")
-	private String lastname;
-	@Column(name="description")
-	private String description;
+	@Id private Long id;
+	@Index private String firstname;
+	@Index private String lastname;
+	@Index private String description;
 	// PHOTO
 	
 	
-	
+	public Speaker () {
+		
+	}
 	
 	public String getFirstname() {
 		return firstname;
