@@ -4,13 +4,19 @@ import com.googlecode.objectify.annotation.*;
 
 @Entity
 public class Speaker {
-	@Id private Long id;
-	@Index private String firstname;
-	@Index private String lastname;
-	@Index private String description;
+	@Id public Long id;
+	@Index public String firstname;
+	@Index public String lastname;
+	@Index public String description;
 	// PHOTO
 
 	public Speaker () {
-		
+
+	}
+
+	public Speaker(String firstname, String lastname, String description){
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.description = description;
 	}
 }
