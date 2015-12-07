@@ -11,35 +11,21 @@
 
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>JSF2 on GAE</title>
+    <title>Project 645-2</title>
 
     <!--<link type="text/css" rel="stylesheet" href="/resources/css/style.css"/>-->
 
 </h:head>
 
 <h:body>
-    <p:ajaxStatus style="width:16px;height:16px;">
-        <f:facet name="start">
-            <h:outputText value="Loading..." style="color:red"/>
-        </f:facet>
-
-        <f:facet name="complete">
-            <h:outputText value=""/>
-        </f:facet>
-    </p:ajaxStatus>
-
     <div class="body">
         <!--<ui:include src="menu.xhtml"/>-->
         <!--<br/>-->
-        <p:growl id="growl" showSummary="true"/>
-        <ui:fragment rendered="#{identity.loggedIn}">
-            <ui:insert name="body"/>
-        </ui:fragment>
-        <h:outputText value="Not logged in" rendered="#{not identity.loggedIn}"/>
+        <ui:insert name="body"/>
     </div>
 
     <div class="footer">
-        JSF 2, PrimeFaces 3 and Spring on GAE
+        Negative Technologies (c) 2015
     </div>
 
 </h:body>
