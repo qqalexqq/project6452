@@ -17,7 +17,7 @@ import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 
-@Api(name="api", version = "v3", namespace = @ApiNamespace(ownerDomain="project645-2.appspot.com", ownerName="ntech", packagePath=""))
+@Api(name="api", version = "v1", namespace = @ApiNamespace(ownerDomain="project645-2.appspot.com", ownerName="ntech", packagePath=""))
 public class API {
     private SpeakerDao speakerDao = new SpeakerDao();
     private ConferenceDao conferenceDao = new ConferenceDao();
