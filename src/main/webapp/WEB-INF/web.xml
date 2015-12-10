@@ -4,10 +4,20 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
 
+    <!-- Seems like GAE cannot handle server side session management. -->
+    <context-param>
+        <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+        <param-value>client</param-value>
+    </context-param>
 
     <context-param>
         <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
         <param-value>true</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Production</param-value>
     </context-param>
 
 
@@ -32,36 +42,49 @@
     </context-param>
 
     <context-param>
+        <param-name>com.sun.faces.allowTextChildren</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+
+    <context-param>
         <param-name>primefaces.THEME</param-name>
         <param-value>aristo</param-value>
     </context-param>
 
-    <context-param>
-        <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Production</param-value>
-    </context-param>
 
-
-
-    <context-param>
-        <param-name>com.sun.faces.allowTextChildren</param-name>
-        <param-value>true</param-value>
-    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:spring/applicationContext.xml</param-value>
     </context-param>
 
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
 
     <listener>
-        <listener-class>
-            com.sun.faces.config.ConfigureListener
-        </listener-class>
+        <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
     </listener>
+
+
+    <!-- JSF mapping -->
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.jsf</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+
 
     <servlet>
         <servlet-name>SystemServiceServlet</servlet-name>
@@ -76,16 +99,6 @@
         <url-pattern>/_ah/spi/*</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.jsf</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>_ah_sessioncleanup</servlet-name>
@@ -97,15 +110,11 @@
         <url-pattern>/_ah/sessioncleanup</url-pattern>
     </servlet-mapping>
 
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>session-cleanup</web-resource-name>
-            <url-pattern>/_ah/sessioncleanup</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>admin</role-name>
-        </auth-constraint>
-    </security-constraint>
+
+    <welcome-file-list>
+        <welcome-file>home.jsf</welcome-file>
+    </welcome-file-list>
+
 
     <security-constraint>
         <web-resource-collection>
@@ -119,28 +128,30 @@
         <!--</auth-constraint>-->
     </security-constraint>
 
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>session-cleanup</web-resource-name>
+            <url-pattern>/_ah/sessioncleanup</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
 
-    <welcome-file-list>
-        <welcome-file>home.jsf</welcome-file>
-    </welcome-file-list>
 
     <session-config>
-        <session-timeout>60</session-timeout>
         <!-- minutes of inactivity -->
+        <session-timeout>60</session-timeout>
     </session-config>
+
 
     <filter>
         <filter-name>ObjectifyFilter</filter-name>
         <filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
     </filter>
+
     <filter-mapping>
         <filter-name>ObjectifyFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
-    <!-- Seems like GAE 1.2.6 cannot handle server side session management. At least for JSF 2.0.1 -->
-    <!--<context-param>-->
-    <!--<param-name>javax.faces.STATE_SAVING_METHOD</param-name>-->
-    <!--<param-value>client</param-value>-->
-    <!--</context-param>-->
 </web-app>
