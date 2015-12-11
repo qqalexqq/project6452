@@ -50,10 +50,4 @@ public class API {
     public List<News> allNews(NewsDao newsDao) {
         return newsDao.getAll();
     }
-
-    @Inject
-    @ApiMethod(name="insertTestSpeaker")
-    public Speaker insertTestSpeaker(SpeakerDao speakerDao) {
-        return speakerDao.save(new Speaker("John", "Smith", "Some of those speaking guys we have."));
-    }
 }
