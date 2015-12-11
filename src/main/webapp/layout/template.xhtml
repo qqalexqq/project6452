@@ -18,9 +18,19 @@
 </h:head>
 
 <h:body>
+    <p:ajaxStatus style="width:16px;height:16px;">
+        <f:facet name="start">
+            <h:outputText value="Loading..." style="color:red"/>
+        </f:facet>
+
+        <f:facet name="complete">
+            <h:outputText value=""/>
+        </f:facet>
+    </p:ajaxStatus>
     <div class="body">
         <!--<ui:include src="menu.xhtml"/>-->
         <!--<br/>-->
+        <p:growl id="growl" showSummary="true"/>
         <ui:insert name="body"/>
     </div>
 
