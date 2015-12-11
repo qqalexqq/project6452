@@ -1,7 +1,5 @@
 package cc.ntechnologies.dao;
 
-import com.googlecode.objectify.Key;
-import com.googlecode.objectify.ObjectifyService;
 import cc.ntechnologies.entities.Speaker;
 import org.springframework.stereotype.Repository;
 
@@ -9,6 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
+
 
 @Repository
 public class SpeakerDao implements Serializable {
@@ -31,6 +30,14 @@ public class SpeakerDao implements Serializable {
 
     public List<Speaker> getAll() {
         return ofy().load().type(Speaker.class).list();
+    }
+
+    public List<Speaker> getAll(int start, int max) {
+        return ofy().load().type(Speaker.class).offset(start).limit(max).list();
+    }
+
+    public int getNumberOfSpeakers() {
+        return ofy().load().type(Speaker.class).count();
     }
 }
 

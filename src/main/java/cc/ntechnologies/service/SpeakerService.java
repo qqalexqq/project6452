@@ -19,4 +19,20 @@ public class SpeakerService implements Serializable {
     public void save(Speaker speaker) {
         speakerDao.save(speaker);
     }
+
+    public void delete(Speaker speaker) {
+        speakerDao.delete(speaker);
+    }
+
+    public Speaker findSpeakerById(Long id) {
+        return speakerDao.findById(id);
+    }
+
+    public List<Speaker> getAll(int first, int pageSize) {
+        return speakerDao.getAll(first, pageSize);
+    }
+
+    public int getNumberOfSpeakers() {
+        return speakerDao.getNumberOfSpeakers();
+    }
 }

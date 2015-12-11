@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                template="layout/template.xhtml">
+
+    <ui:define name="body">
+        <h:form id="listSpeakersForm" prependId="false">
+            <p:panel id="speakerPanel" header="List speakers">
+                <p:contextMenu for="speakerTable" rendered="#{speakerTableController.speakerModel.rowCount > 0}">
+                    <p:menuitem value="Save" update="speakerTable" action="#{speakerTableController.updateSpeaker}" />
+                    <p:menuitem id="removeButton" value="Delete" update="listSpeakersForm" action="#{speakerTableController.deleteSpeaker}" />
+                </p:contextMenu>
+                <p:dataTable var="_speaker" id="speakerTable" lazy="true" dynamic="true" rowKey="#{_speaker.id}"
+                             value="#{speakerTableController.speakerModel}" selection="#{speakerTableController.selectedSpeaker}" selectionMode="single"
+                             paginator="true" rows="10">
+                    <p:column resizable="true">
+                        <f:facet name="header">
+                            First name
+                        </f:facet>
+                        <p:inplace rendered="#{not empty _speaker.firstname}">
+                            <h:inputText value="#{_speaker.firstname}" id="speaker_firstname" />
+                        </p:inplace>
+                        <h:inputText value="#{_speaker.firstname}" rendered="#{empty _speaker.firstname}" />
+                    </p:column>
+
+                    <p:column resizable="true">
+                        <f:facet name="header">
+                            Last name
+                        </f:facet>
+                        <p:inplace rendered="#{not empty _speaker.lastname}">
+                            <h:inputText value="#{_speaker.lastname}" id="speaker_lastname" />
+                        </p:inplace>
+                        <h:inputText value="#{_speaker.lastname}" rendered="#{empty _speaker.lastname}" />
+                    </p:column>
+
+                    <p:column resizable="true">
+                        <f:facet name="header">
+                            Description
+                        </f:facet>
+                        <p:inplace rendered="#{not empty _speaker.description}">
+                            <h:inputTextarea cols="50" rows="10" value="#{_speaker.description}" id="speaker_description" />
+                        </p:inplace>
+                        <h:inputTextarea cols="50" rows="10" value="#{_speaker.description}" rendered="#{empty _speaker.description}" />
+                    </p:column>
+
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
