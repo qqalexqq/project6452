@@ -4,16 +4,20 @@ import com.googlecode.objectify.annotation.*;
 
 import java.io.Serializable;
 
+
 @Entity
 public class Speaker implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private Long id;
-	@Index
+
+    @Index
 	private String firstname;
-	@Index
+
+    @Index
 	private String lastname;
+
 	@Index
 	private String description;
 	// PHOTO
@@ -23,9 +27,9 @@ public class Speaker implements Serializable {
 	}
 
 	public Speaker(String firstname, String lastname, String description){
-		this.setFirstname(firstname);
-		this.setLastname(lastname);
-		this.setDescription(description);
+		this.firstname = firstname;
+		this.lastname =lastname;
+		this.description = description;
 	}
 
 	public String getFullName() { return String.format("%s %s", this.getFirstname(), this.getLastname()); }
