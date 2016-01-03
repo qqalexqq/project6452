@@ -33,8 +33,26 @@ public class SpeakerTableController implements Serializable {
 
         speakerModel = new LazyDataModel<Speaker>() {
             @Override
-            public List<Speaker> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, String> filters) {
+            public List<Speaker> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
                 return speakerService.getAll(first, pageSize);
+            }
+
+            @Override
+            public Long getRowKey(Speaker speaker) {
+                return (speaker == null ? null : speaker.getId());
+            }
+
+            @Override
+            public Speaker getRowData(String rowKey) {
+                Long id = Long.parseLong(rowKey);
+
+                for (Speaker speaker : (List<Speaker>) this.getWrappedData()) {
+                    if (speaker.getId().equals(id)) {
+                        return speaker;
+                    }
+                }
+
+                return null;
             }
         };
 
