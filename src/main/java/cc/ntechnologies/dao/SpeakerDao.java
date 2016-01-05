@@ -28,10 +28,6 @@ public class SpeakerDao implements Serializable {
         return speaker;
     }
 
-    public List<Speaker> getAll() {
-        return ofy().load().type(Speaker.class).list();
-    }
-
     public List<Speaker> getAll(int start, int max) {
         return ofy().load().type(Speaker.class).offset(start).limit(max).list();
     }

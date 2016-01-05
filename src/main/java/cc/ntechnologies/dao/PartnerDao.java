@@ -2,12 +2,15 @@ package cc.ntechnologies.dao;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+import java.io.Serializable;
 import java.util.List;
 
 import cc.ntechnologies.entities.Partner;
+import org.springframework.stereotype.Repository;
 
-public class PartnerDao {
 
+@Repository
+public class PartnerDao implements Serializable {
 
     private final static long serialVersionUID = 1L;
 
@@ -25,7 +28,11 @@ public class PartnerDao {
         return partner;
     }
 
-    public List<Partner> getAll() {
-        return ofy().load().type(Partner.class).list();
+    public List<Partner> getAll(int start, int max) {
+        return ofy().load().type(Partner.class).offset(start).limit(max).list();
+    }
+
+    public int getNumberOfPartners() {
+        return ofy().load().type(Partner.class).count();
     }
 }

@@ -2,12 +2,16 @@ package cc.ntechnologies.dao;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+import java.io.Serializable;
 import java.util.List;
 
 import cc.ntechnologies.entities.News;
+import org.springframework.stereotype.Repository;
 
-public class NewsDao {
-	
+
+@Repository
+public class NewsDao implements Serializable {
+
     private final static long serialVersionUID = 1L;
 
     public News findById(Long id) {
@@ -24,8 +28,11 @@ public class NewsDao {
         return news;
     }
 
-    public List<News> getAll() {
-        return ofy().load().type(News.class).list();
+    public List<News> getAll(int start, int max) {
+        return ofy().load().type(News.class).offset(start).limit(max).list();
     }
 
+    public int getNumberOfNews() {
+        return ofy().load().type(News.class).count();
+    }
 }
