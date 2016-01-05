@@ -20,16 +20,18 @@ public class Speaker implements Serializable {
 
 	@Index
 	private String description;
-	// PHOTO
+
+	private GenericImage image;
 
 	public Speaker () {
 
 	}
 
-	public Speaker(String firstname, String lastname, String description){
+	public Speaker(String firstname, String lastname, String description, GenericImage image) {
 		this.firstname = firstname;
-		this.lastname =lastname;
+		this.lastname = lastname;
 		this.description = description;
+		this.image = image;
 	}
 
 	public String getFullName() { return String.format("%s %s", this.getFirstname(), this.getLastname()); }
@@ -57,5 +59,11 @@ public class Speaker implements Serializable {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public GenericImage getImage() {
+		return image;
+	}
+	public void setImage(GenericImage image) {
+		this.image = image;
 	}
 }

@@ -1,8 +1,10 @@
 package cc.ntechnologies.controller;
 
 import cc.ntechnologies.FacesUtils;
+import cc.ntechnologies.entities.GenericImage;
 import cc.ntechnologies.entities.Speaker;
 import cc.ntechnologies.service.SpeakerService;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 import org.springframework.context.annotation.Scope;
@@ -24,6 +26,7 @@ public class SpeakerTableController implements Serializable {
 
     private LazyDataModel<Speaker> speakerModel;
     private Speaker selectedSpeaker;
+    private GenericImage image;
 
     private static final Logger log = Logger.getLogger(SpeakerTableController.class.getName());
 
@@ -69,7 +72,18 @@ public class SpeakerTableController implements Serializable {
         facesUtils.addSuccessMessage("Speaker successfully deleted.");
     }
 
+    public void handleImageUpload(FileUploadEvent event) {
+        this.image = new GenericImage();
+        this.image.createImageFromFile(event.getFile());
+
+        facesUtils.addSuccessMessage("Succesfully uploaded " + event.getFile().getFileName() + ". Right click and select Save to save changes to the speaker.");
+    }
+
     public void updateSpeaker() {
+        if (this.image != null) {
+            this.selectedSpeaker.setImage(this.image);
+        }
+
         speakerService.save(selectedSpeaker);
 
         facesUtils.addSuccessMessage("Speaker successfully updated.");
