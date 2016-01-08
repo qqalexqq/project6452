@@ -17,6 +17,7 @@
 
     <system-properties>
         <property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />
+        <property name="java.io.tmpdir" value="." />
     </system-properties>
 
     <admin-console>
