@@ -32,8 +32,6 @@ public class SpeakerTableController implements Serializable {
 
     @Inject
     public SpeakerTableController(final SpeakerService speakerService, FacesUtils facesUtils) {
-        this.facesUtils = facesUtils;
-
         speakerModel = new LazyDataModel<Speaker>() {
             @Override
             public List<Speaker> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {

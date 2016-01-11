@@ -13,8 +13,8 @@
         <h:form id="listSpeakersForm" prependId="false">
             <p:panel id="speakerPanel" header="List speakers">
                 <p:contextMenu for="speakerTable" rendered="#{speakerTableController.speakerModel.rowCount > 0}">
-                    <p:menuitem value="Save" update="speakerTable" action="#{speakerTableController.updateSpeaker}" />
-                    <p:menuitem id="removeButton" value="Delete" update="listSpeakersForm" action="#{speakerTableController.deleteSpeaker}" />
+                    <p:menuitem value="Save" update="speakerTable,growl" action="#{speakerTableController.updateSpeaker}" />
+                    <p:menuitem id="removeButton" value="Delete" update="listSpeakersForm,growl" action="#{speakerTableController.deleteSpeaker}" />
                 </p:contextMenu>
                 <p:dataTable var="_speaker" id="speakerTable" dynamic="true" lazy="true"
                              value="#{speakerTableController.speakerModel}" selection="#{speakerTableController.selectedSpeaker}" selectionMode="single"
@@ -34,9 +34,9 @@
                             First name
                         </f:facet>
                         <p:inplace rendered="#{not empty _speaker.firstname}">
-                            <h:inputText value="#{_speaker.firstname}" id="speaker_firstname" />
+                            <h:inputText value="#{_speaker.firstname}" id="speaker_firstname" required="true" />
                         </p:inplace>
-                        <h:inputText value="#{_speaker.firstname}" rendered="#{empty _speaker.firstname}" />
+                        <h:inputText value="#{_speaker.firstname}" rendered="#{empty _speaker.firstname}" required="true" />
                     </p:column>
 
                     <p:column resizable="true">
@@ -44,9 +44,9 @@
                             Last name
                         </f:facet>
                         <p:inplace rendered="#{not empty _speaker.lastname}">
-                            <h:inputText value="#{_speaker.lastname}" id="speaker_lastname" />
+                            <h:inputText value="#{_speaker.lastname}" id="speaker_lastname" required="true" />
                         </p:inplace>
-                        <h:inputText value="#{_speaker.lastname}" rendered="#{empty _speaker.lastname}" />
+                        <h:inputText value="#{_speaker.lastname}" rendered="#{empty _speaker.lastname}" required="true" />
                     </p:column>
 
                     <p:column resizable="true">
@@ -54,9 +54,9 @@
                             Description
                         </f:facet>
                         <p:inplace rendered="#{not empty _speaker.description}">
-                            <h:inputTextarea cols="50" rows="10" value="#{_speaker.description}" id="speaker_description" />
+                            <h:inputTextarea cols="50" rows="10" value="#{_speaker.description}" id="speaker_description" required="true" />
                         </p:inplace>
-                        <h:inputTextarea cols="50" rows="10" value="#{_speaker.description}" rendered="#{empty _speaker.description}" />
+                        <h:inputTextarea cols="50" rows="10" value="#{_speaker.description}" rendered="#{empty _speaker.description}" required="true" />
                     </p:column>
 
                 </p:dataTable>

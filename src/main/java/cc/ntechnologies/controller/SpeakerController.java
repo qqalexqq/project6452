@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import java.io.Serializable;
 
@@ -25,16 +26,16 @@ public class SpeakerController implements Serializable {
     @Inject
     private FacesUtils facesUtils;
 
-    @NotNull
+    @Size(min=1, message="Please provide speaker first name.")
     private String firstname;
 
-    @NotNull
+    @Size(min=1, message="Please provide speaker last name.")
     private String lastname;
 
-    @NotNull
+    @Size(min=1, message="Please provide speaker description.")
     private String description;
 
-    @NotNull
+    @NotNull(message="Please provide speaker image.")
     private UploadedFile image;
 
     public void createSpeaker() {
