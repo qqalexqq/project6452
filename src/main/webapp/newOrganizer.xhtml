@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/template.xhtml">
+
+    <ui:define name="body">
+        <h:form>
+            <p:panel id="panel" header="New organizer" style="margin-bottom:10px;">
+                <h:panelGrid columns="2">
+                    <f:validateBean>
+                        <h:outputLabel for="firstname">First name</h:outputLabel>
+                        <h:inputText id="firstname" value="#{organizerController.firstname}" />
+
+                        <h:outputLabel for="lastname">Last name</h:outputLabel>
+                        <h:inputText id="lastname" value="#{organizerController.lastname}" />
+                    </f:validateBean>
+                </h:panelGrid>
+                <br/>
+                <h:commandButton id="createOrganizer" value="Create organizer" action="#{organizerController.createOrganizer}" update="growl" />
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

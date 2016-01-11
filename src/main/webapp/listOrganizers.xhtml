@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/template.xhtml">
+
+    <ui:define name="body">
+        <h:form id="listOrganizersForm" prependId="false">
+            <p:panel id="organizerPanel" header="List organizers">
+                <p:contextMenu for="organizerTable" rendered="#{organizerTableController.organizerModel.rowCount > 0}">
+                    <p:menuitem value="Save" update="organizerTable,growl" action="#{organizerTableController.updateOrganizer}" />
+                    <p:menuitem id="removeButton" value="Delete" update="listOrganizersForm,growl" action="#{organizerTableController.deleteOrganizer}" />
+                </p:contextMenu>
+                <p:dataTable var="_organizer" id="organizerTable" dynamic="true" lazy="true"
+                             value="#{organizerTableController.organizerModel}" selection="#{organizerTableController.selectedOrganizer}" selectionMode="single"
+                             paginator="true" rows="10">
+                    <p:column resizable="true">
+                        <f:facet name="header">
+                            First name
+                        </f:facet>
+                        <p:inplace rendered="#{not empty _organizer.firstname}">
+                            <h:inputText value="#{_organizer.firstname}" id="organizer_firstname" required="true" />
+                        </p:inplace>
+                        <h:inputText value="#{_organizer.firstname}" rendered="#{empty _organizer.firstname}" required="true" />
+                    </p:column>
+
+                    <p:column resizable="true">
+                        <f:facet name="header">
+                            Last name
+                        </f:facet>
+                        <p:inplace rendered="#{not empty _organizer.lastname}">
+                            <h:inputText value="#{_organizer.lastname}" id="organizer_lastname" required="true" />
+                        </p:inplace>
+                        <h:inputText value="#{_organizer.lastname}" rendered="#{empty _organizer.lastname}" required="true" />
+                    </p:column>
+
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

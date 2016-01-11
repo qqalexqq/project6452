@@ -2,9 +2,13 @@ package cc.ntechnologies.entities;
 
 import com.googlecode.objectify.annotation.*;
 
+import java.io.Serializable;
+
 
 @Entity
-public class Organizer {
+public class Organizer implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     private Long id;
 
@@ -24,6 +28,8 @@ public class Organizer {
         this.lastname = lastname;
     }
 
+
+    public String getFullName() { return String.format("%s %s", this.getFirstname(), this.getLastname()); }
 
     public Long getId() {
         return id;
