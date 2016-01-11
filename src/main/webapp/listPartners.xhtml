@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/template.xhtml">
+
+    <ui:define name="body">
+        <h:form id="listPartnersForm" prependId="false">
+            <p:panel id="partnerPanel" header="List partners">
+                <p:contextMenu for="partnerTable" rendered="#{partnerTableController.partnerModel.rowCount > 0}">
+                    <p:menuitem value="Save" update="partnerTable,growl" action="#{partnerTableController.updatePartner}" />
+                    <p:menuitem id="removeButton" value="Delete" update="listPartnersForm,growl" action="#{partnerTableController.deletePartner}" />
+                </p:contextMenu>
+                <p:dataTable var="_partner" id="partnerTable" dynamic="true" lazy="true"
+                             value="#{partnerTableController.partnerModel}" selection="#{partnerTableController.selectedPartner}" selectionMode="single"
+                             paginator="true" rows="10">
+                    <p:column resizable="false" width="260">
+                        <f:facet name="header">
+                            Image
+                        </f:facet>
+                        <p:inplace rendered="#{not empty _partner.image}">
+                            <p:fileUpload value="#{_partner.image.changeTitle}" fileUploadListener="#{partnerTableController.handleImageUpload}" mode="advanced" skinSimple="true" auto="true" update="growl" sizeLimit="10485760" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                        </p:inplace>
+                        <h:graphicImage value="#{_partner.image.imageRepresentation}" style="border:0"/>
+                    </p:column>
+
+                    <p:column resizable="true">
+                        <f:facet name="header">
+                            Name
+                        </f:facet>
+                        <p:inplace rendered="#{not empty _partner.name}">
+                            <h:inputText value="#{_partner.name}" id="partner_name" required="true" />
+                        </p:inplace>
+                        <h:inputText value="#{_partner.name}" rendered="#{empty _partner.name}" required="true" />
+                    </p:column>
+
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
