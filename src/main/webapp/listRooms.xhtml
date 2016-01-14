@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/template.xhtml">
+
+    <ui:define name="body">
+        <h:form id="listRoomsForm" prependId="false">
+            <p:panel id="roomPanel" header="List rooms">
+                <p:contextMenu for="roomTable" rendered="#{roomTableController.roomModel.rowCount > 0}">
+                    <p:menuitem value="Save" update="roomTable,growl" action="#{roomTableController.updateRoom}" />
+                    <p:menuitem id="removeButton" value="Delete" update="listRoomsForm,growl" action="#{roomTableController.deleteRoom}" />
+                </p:contextMenu>
+                <p:dataTable var="_room" id="roomTable" dynamic="true" lazy="true"
+                             value="#{roomTableController.roomModel}" selection="#{roomTableController.selectedRoom}" selectionMode="single"
+                             paginator="true" rows="10">
+                    <p:column resizable="true">
+                        <f:facet name="header">
+                            Building name
+                        </f:facet>
+                        <p:inplace rendered="#{not empty _room.building}">
+                            <h:inputText value="#{_room.building}" id="room_building" required="true" />
+                        </p:inplace>
+                        <h:inputText value="#{_room.building}" rendered="#{empty _room.building}" required="true" />
+                    </p:column>
+
+                    <p:column resizable="true">
+                        <f:facet name="header">
+                            Building number
+                        </f:facet>
+                        <p:inplace rendered="#{not empty _room.number}">
+                            <h:inputText id="room_number" value="#{_room.number}" required="true">
+                                <f:validateLongRange minimum="0" />
+                            </h:inputText>
+                        </p:inplace>
+                        <h:inputText rendered="#{empty _room.number}" value="#{_room.number}" required="true">
+                            <f:validateLongRange minimum="0" />
+                        </h:inputText>
+                    </p:column>
+
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

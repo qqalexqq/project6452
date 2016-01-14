@@ -2,9 +2,13 @@ package cc.ntechnologies.entities;
 
 import com.googlecode.objectify.annotation.*;
 
+import java.io.Serializable;
+
 
 @Entity
-public class Room {
+public class Room implements Serializable {
+    private static final long serialVersionUID = 1L;
+
 	@Id
     private Long id;
 
@@ -23,6 +27,9 @@ public class Room {
         this.number = number;
     }
 
+    public String getFullRoomName() {
+        return this.building + " " + this.number;
+    }
 
     public Long getId() {
         return id;
