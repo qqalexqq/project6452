@@ -10,7 +10,7 @@
                 template="layout/template.xhtml">
 
     <ui:define name="body">
-        <h:form enctype="multipart/form-data">
+        <h:form id="speakerForm" enctype="multipart/form-data">
             <p:panel id="panel" header="New speaker" style="margin-bottom:10px;">
                 <h:panelGrid columns="2">
                     <f:validateBean>
@@ -21,7 +21,7 @@
                         <h:inputText id="lastname" value="#{speakerController.lastname}" />
 
                         <h:outputLabel for="description">Description</h:outputLabel>
-                        <h:inputText id="description" value="#{speakerController.description}" />
+                        <h:inputTextarea id="description" cols="50" rows="10" value="#{speakerController.description}" />
 
                         <h:outputLabel for="image">Image</h:outputLabel>
                         <p:fileUpload id="image" value="#{speakerController.image}" mode="simple" skinSimple="true" sizeLimit="10485760" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
