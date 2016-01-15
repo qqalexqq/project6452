@@ -1,5 +1,6 @@
 package cc.ntechnologies.entities;
 
+import cc.ntechnologies.Config;
 import com.google.appengine.api.images.Image;
 import com.google.appengine.api.images.ImagesService;
 import com.google.appengine.api.images.ImagesServiceFactory;
@@ -32,7 +33,7 @@ public class GenericImage implements Serializable {
 
         Image uploadImage = ImagesServiceFactory.makeImage(imageBytes);
 
-        Transform resize = ImagesServiceFactory.makeResize(250, 250);
+        Transform resize = ImagesServiceFactory.makeResize(Config.RESIZE_IMAGE_WIDTH, Config.RESIZE_IMAGE_HEIGHT);
 
         Image newImage = imagesService.applyTransform(resize, uploadImage);
 
