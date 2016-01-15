@@ -74,7 +74,7 @@ public class SpeakerTableController implements Serializable {
         this.image = new GenericImage();
         this.image.createImageFromFile(event.getFile());
 
-        facesUtils.addSuccessMessage("Succesfully uploaded " + event.getFile().getFileName() + ". Right click and select Save to save changes to the speaker.");
+        facesUtils.addSuccessMessage("Successfully uploaded " + event.getFile().getFileName() + ". Right click and select Save to save changes to the speaker.");
     }
 
     public void updateSpeaker() {
