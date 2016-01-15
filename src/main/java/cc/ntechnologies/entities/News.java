@@ -1,5 +1,7 @@
 package cc.ntechnologies.entities;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.googlecode.objectify.Ref;
@@ -7,7 +9,9 @@ import com.googlecode.objectify.annotation.*;
 
 
 @Entity
-public class News {
+public class News implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     private Long id;
 
@@ -16,23 +20,23 @@ public class News {
 
     @Index
     private String text;
-    // PHOTO
+
+    private GenericImage image;
 
     //relations
     @Index
-    private List<Ref<Organizer>> organizers;
-
+    private Ref<Organizer> organizer;
 
     public News() {
 
     }
 
-    public News(String title, String text, List<Ref<Organizer>> organizers) {
+    public News(String title, String text, Organizer organizer, GenericImage image) {
         this.title = title;
         this.text = text;
-        this.organizers = organizers;
+        this.setOrganizer(organizer);
+        this.image = image;
     }
-
 
     public Long getId() {
         return id;
@@ -52,10 +56,16 @@ public class News {
     public void setText(String text) {
         this.text = text;
     }
-    public List<Ref<Organizer>> getOrganizers() {
-        return organizers;
+    public GenericImage getImage() {
+        return image;
     }
-    public void setOrganizers(List<Ref<Organizer>> organizers) {
-        this.organizers = organizers;
+    public void setImage(GenericImage image) {
+        this.image = image;
+    }
+    public Organizer getOrganizer() {
+        return organizer.get();
+    }
+    public void setOrganizer(Organizer organizer) {
+        this.organizer = Ref.create(organizer);
     }
 }

@@ -49,4 +49,26 @@ public class Organizer implements Serializable {
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
+
+    @Override
+    public String toString() {
+        return this.getFullName();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (!(obj instanceof Organizer))//changed this from (getClass() != obj.getClass())
+            return false;
+        Organizer other = (Organizer) obj;
+        if (this.getId() == null) {
+            if (other.getId() != null)
+                return false;
+        } else if (!this.getId().equals(other.getId()))
+            return false;
+        return true;
+    }
 }

@@ -17,6 +17,12 @@
             <default-locale>en</default-locale>
             <supported-locale>en</supported-locale>
         </locale-config>
+        <application-extension>
+            <converter>
+                <converter-id>organizerConverter</converter-id>
+                <converter-class>cc.ntechnologies.service.OrganizerConverter</converter-class>
+            </converter>
+        </application-extension>
     </application>
 
 </faces-config>

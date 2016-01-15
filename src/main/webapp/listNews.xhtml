@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/template.xhtml">
+
+    <ui:define name="body">
+        <h:form id="listNewsForm" prependId="false">
+            <p:panel id="newsPanel" header="List news">
+                <p:contextMenu for="newsTable" rendered="#{newsTableController.newsModel.rowCount > 0}">
+                    <p:menuitem value="Save" update="newsTable,growl" action="#{newsTableController.updateNews}" />
+                    <p:menuitem id="removeButton" value="Delete" update="listNewsForm,growl" action="#{newsTableController.deleteNews}" />
+                </p:contextMenu>
+                <p:dataTable var="_news" id="newsTable" dynamic="true" lazy="true"
+                             value="#{newsTableController.newsModel}" selection="#{newsTableController.selectedNews}" selectionMode="single"
+                             paginator="true" rows="10">
+                    <p:column resizable="false" width="260">
+                        <f:facet name="header">
+                            Image
+                        </f:facet>
+                        <p:inplace rendered="#{not empty _news.image}">
+                            <p:fileUpload value="#{_news.image.changeTitle}" fileUploadListener="#{newsTableController.handleImageUpload}" mode="advanced" skinSimple="true" auto="true" update="growl" sizeLimit="10485760" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                        </p:inplace>
+                        <h:graphicImage value="#{_news.image.imageRepresentation}" style="border:0"/>
+                    </p:column>
+
+                    <p:column resizable="true">
+                        <f:facet name="header">
+                            Title
+                        </f:facet>
+                        <p:inplace rendered="#{not empty _news.title}">
+                            <h:inputText value="#{_news.title}" id="news_title" required="true" />
+                        </p:inplace>
+                        <h:inputText value="#{_news.title}" rendered="#{empty _news.title}" required="true" />
+                    </p:column>
+
+                    <p:column resizable="true">
+                        <f:facet name="header">
+                            Text
+                        </f:facet>
+                        <p:inplace rendered="#{not empty _news.text}">
+                            <h:inputTextarea cols="50" rows="10" value="#{_news.text}" id="news_text" required="true" />
+                        </p:inplace>
+                        <h:inputTextarea cols="50" rows="10" value="#{_news.text}" rendered="#{empty _news.text}" required="true" />
+                    </p:column>
+
+                    <p:column resizable="true">
+                        <f:facet name="header">
+                            Organizer
+                        </f:facet>
+                        <p:inplace label="#{_news.organizer.fullName}" rendered="#{not empty _news.organizer}">
+
+                            <p:selectOneMenu id="news_organizer" value="#{_news.organizer}" converter="#{organizerConverter}" panelStyle="width: 180px"
+                                             var="t" style="width: 160px">
+                                <f:selectItems value="#{newsTableController.organizersList}" var="organizer" itemLabel="#{organizer.fullName}" itemValue="#{organizer}" />
+
+                                <p:column>
+                                    <h:outputText value="#{t.fullName}" />
+                                </p:column>
+
+                            </p:selectOneMenu>
+                        </p:inplace>
+                        <p:selectOneMenu rendered="#{empty _news.organizer}" value="#{_news.organizer}" converter="organizerConverter" panelStyle="width: 180px"
+                                         var="t" style="width: 160px">
+                            <f:selectItems value="#{newsTableController.organizersList}" var="organizer" itemLabel="#{organizer.fullName}" itemValue="#{organizer}" />
+
+                            <p:column>
+                                <h:outputText value="#{t.fullName}" />
+                            </p:column>
+
+                        </p:selectOneMenu>
+                    </p:column>
+
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
