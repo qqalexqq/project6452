@@ -6,7 +6,6 @@ import cc.ntechnologies.entities.Room;
 import cc.ntechnologies.entities.Speaker;
 import cc.ntechnologies.service.ConferenceService;
 import cc.ntechnologies.service.RoomService;
-import cc.ntechnologies.service.SpeakerConverter;
 import cc.ntechnologies.service.SpeakerService;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Controller;
 
 import javax.inject.Inject;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;

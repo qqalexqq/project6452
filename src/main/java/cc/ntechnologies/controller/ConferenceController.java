@@ -7,19 +7,14 @@ import cc.ntechnologies.entities.Speaker;
 import cc.ntechnologies.service.ConferenceService;
 import cc.ntechnologies.service.RoomService;
 import cc.ntechnologies.service.SpeakerService;
-import org.primefaces.event.SelectEvent;
-import org.primefaces.model.UploadedFile;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;

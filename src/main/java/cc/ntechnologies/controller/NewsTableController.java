@@ -5,7 +5,6 @@ import cc.ntechnologies.entities.GenericImage;
 import cc.ntechnologies.entities.News;
 import cc.ntechnologies.entities.Organizer;
 import cc.ntechnologies.service.NewsService;
-import cc.ntechnologies.service.OrganizerConverter;
 import cc.ntechnologies.service.OrganizerService;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.LazyDataModel;

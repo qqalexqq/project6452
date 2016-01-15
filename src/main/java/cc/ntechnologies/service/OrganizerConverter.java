@@ -1,19 +1,14 @@
 package cc.ntechnologies.service;
 
 import cc.ntechnologies.entities.Organizer;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
-import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class OrganizerConverter implements Converter {
