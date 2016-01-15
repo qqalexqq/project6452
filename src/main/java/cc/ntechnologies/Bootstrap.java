@@ -16,6 +16,5 @@ public class Bootstrap {
         ObjectifyService.register(Partner.class);
         ObjectifyService.register(Room.class);
         ObjectifyService.register(Speaker.class);
-        ObjectifyService.register(User.class);
     }
 }
