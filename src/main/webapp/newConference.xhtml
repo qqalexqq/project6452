@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/template.xhtml">
+
+    <ui:define name="body">
+        <h:form>
+            <p:panel id="panel" header="New talk" style="margin-bottom:10px;">
+                <h:panelGrid columns="2">
+                    <f:validateBean>
+                        <h:outputLabel for="topic">Topic</h:outputLabel>
+                        <h:inputText id="topic" value="#{conferenceController.topic}" />
+
+                        <p:outputLabel for="date">Date and time</p:outputLabel>
+                        <p:inputText id="date" value="#{conferenceController.date}" placeholder="dd.mm.yyyy hh:mm">
+                            <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                        </p:inputText>
+
+                        <h:outputLabel for="speaker">Speaker</h:outputLabel>
+                        <h:selectOneMenu id="speaker" value="#{conferenceController.speakerId}" style="width: 100%">
+                            <f:selectItems value="#{conferenceController.speakersMap}" />
+                        </h:selectOneMenu>
+
+                        <h:outputLabel for="room">Room</h:outputLabel>
+                        <h:selectOneMenu id="room" value="#{conferenceController.roomId}" style="width: 100%">
+                            <f:selectItems value="#{conferenceController.roomsMap}" />
+                        </h:selectOneMenu>
+                    </f:validateBean>
+                </h:panelGrid>
+                <br/>
+                <h:commandButton id="createConference" value="Create talk" action="#{conferenceController.createConference}" update="growl" />
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

@@ -1,16 +1,18 @@
 package cc.ntechnologies.entities;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.googlecode.objectify.Ref;
-import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Id;
-import com.googlecode.objectify.annotation.Index;
-import com.googlecode.objectify.annotation.Parent;
+import com.googlecode.objectify.annotation.*;
 
 
 @Entity
-public class Conference {
+public class Conference implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     private Long id;
 
@@ -21,8 +23,7 @@ public class Conference {
     private Date date;
 
     //relations
-    // @Load @Parent private List<Ref<Speaker>> speakers;
-    @Parent
+    private Ref<Speaker> speaker;
     private Ref<Room> room;
 
 
@@ -30,10 +31,11 @@ public class Conference {
 
     }
 
-    public Conference(String topic, Date date, Ref<Room> room) {
+    public Conference(String topic, Date date, Room room, Speaker speaker) {
         this.topic = topic;
         this.date = date;
-        this.room = room;
+        this.setRoom(room);
+        this.setSpeaker(speaker);
     }
 
 
@@ -53,12 +55,18 @@ public class Conference {
         return date;
     }
     public void setDate(Date date) {
-        this.date = date;
+         this.date = date;
     }
-    public Ref<Room> getRoom() {
-        return room;
+    public Room getRoom() {
+        return this.room.get();
     }
-    public void setRoom(Ref<Room> room) {
-        this.room = room;
+    public void setRoom(Room room) {
+        this.room = Ref.create(room);
+    }
+    public Speaker getSpeaker() {
+        return this.speaker.get();
+    }
+    public void setSpeaker(Speaker speaker) {
+        this.speaker = Ref.create(speaker);
     }
 }

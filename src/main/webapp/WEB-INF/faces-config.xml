@@ -22,6 +22,14 @@
                 <converter-id>organizerConverter</converter-id>
                 <converter-class>cc.ntechnologies.service.OrganizerConverter</converter-class>
             </converter>
+            <converter>
+                <converter-id>speakerConverter</converter-id>
+                <converter-class>cc.ntechnologies.service.SpeakerConverter</converter-class>
+            </converter>
+            <converter>
+                <converter-id>roomConverter</converter-id>
+                <converter-class>cc.ntechnologies.service.RoomConverter</converter-class>
+            </converter>
         </application-extension>
     </application>
 

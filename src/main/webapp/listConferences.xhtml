@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/template.xhtml">
+
+    <ui:define name="body">
+        <h:form id="listConferenceForm" prependId="false">
+            <p:panel id="conferencePanel" header="List talks">
+                <p:contextMenu for="conferenceTable" rendered="#{conferenceTableController.conferenceModel.rowCount > 0}">
+                    <p:menuitem value="Save" update="conferenceTable,growl" action="#{conferenceTableController.updateConference}" />
+                    <p:menuitem id="removeButton" value="Delete" update="listConferenceForm,growl" action="#{conferenceTableController.deleteConference}" />
+                </p:contextMenu>
+                <p:dataTable var="_conference" id="conferenceTable" dynamic="true" lazy="true"
+                             value="#{conferenceTableController.conferenceModel}" selection="#{conferenceTableController.selectedConference}" selectionMode="single"
+                             paginator="true" rows="10">
+                    <p:column resizable="true">
+                        <f:facet name="header">
+                            Topic
+                        </f:facet>
+                        <p:inplace rendered="#{not empty _conference.topic}">
+                            <h:inputText value="#{_conference.topic}" id="conference_topic" required="true" />
+                        </p:inplace>
+                        <h:inputText value="#{_conference.topic}" rendered="#{empty _conference.topic}" required="true" />
+                    </p:column>
+
+                    <p:column resizable="true">
+                        <f:facet name="header">
+                            Date and time
+                        </f:facet>
+                        <p:inplace rendered="#{not empty _conference.date}">
+                            <p:inputText id="conference_date" value="#{_conference.date}" placeholder="dd.mm.yyyy hh:mm" required="true">
+                                <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                            </p:inputText>
+                        </p:inplace>
+                        <p:inputText rendered="#{empty _conference.date}" value="#{_conference.date}" placeholder="dd.mm.yyyy hh:mm" required="true">
+                            <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                        </p:inputText>
+                    </p:column>
+
+                    <p:column resizable="true">
+                        <f:facet name="header">
+                            Room
+                        </f:facet>
+                        <p:inplace label="#{_conference.room.fullRoomName}" rendered="#{not empty _conference.room}">
+
+                            <p:selectOneMenu id="conference_room" value="#{_conference.room}" converter="#{roomConverter}" panelStyle="width: 180px"
+                                             var="t" style="width: 160px">
+                                <f:selectItems value="#{conferenceTableController.roomsList}" var="room" itemLabel="#{room.fullRoomName}" itemValue="#{room}" />
+
+                                <p:column>
+                                    <h:outputText value="#{t.fullRoomName}" />
+                                </p:column>
+
+                            </p:selectOneMenu>
+                        </p:inplace>
+                        <p:selectOneMenu rendered="#{empty _conference.room}" value="#{_conference.room}" converter="roomConverter" panelStyle="width: 180px"
+                                         var="t" style="width: 160px">
+                            <f:selectItems value="#{conferenceTableController.roomsList}" var="room" itemLabel="#{room.fullRoomName}" itemValue="#{room}" />
+
+                            <p:column>
+                                <h:outputText value="#{t.fullRoomName}" />
+                            </p:column>
+
+                        </p:selectOneMenu>
+                    </p:column>
+
+                    <p:column resizable="true">
+                        <f:facet name="header">
+                            Speaker
+                        </f:facet>
+                        <p:inplace label="#{_conference.speaker.fullName}" rendered="#{not empty _conference.speaker}">
+
+                            <p:selectOneMenu id="conference_speaker" value="#{_conference.speaker}" converter="#{speakerConverter}" panelStyle="width: 180px"
+                                             var="t" style="width: 160px">
+                                <f:selectItems value="#{conferenceTableController.speakersList}" var="speaker" itemLabel="#{speaker.fullName}" itemValue="#{speaker}" />
+
+                                <p:column>
+                                    <h:outputText value="#{t.fullName}" />
+                                </p:column>
+
+                            </p:selectOneMenu>
+                        </p:inplace>
+                        <p:selectOneMenu rendered="#{empty _conference.speaker}" value="#{_conference.speaker}" converter="speakerConverter" panelStyle="width: 180px"
+                                         var="t" style="width: 160px">
+                            <f:selectItems value="#{conferenceTableController.speakersList}" var="speaker" itemLabel="#{speaker.fullName}" itemValue="#{speaker}" />
+
+                            <p:column>
+                                <h:outputText value="#{t.fullName}" />
+                            </p:column>
+
+                        </p:selectOneMenu>
+                    </p:column>
+
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

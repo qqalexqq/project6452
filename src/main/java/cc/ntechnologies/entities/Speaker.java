@@ -66,4 +66,21 @@ public class Speaker implements Serializable {
 	public void setImage(GenericImage image) {
 		this.image = image;
 	}
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (!(obj instanceof Speaker))//changed this from (getClass() != obj.getClass())
+            return false;
+        Speaker other = (Speaker) obj;
+        if (this.getId() == null) {
+            if (other.getId() != null)
+                return false;
+        } else if (!this.getId().equals(other.getId()))
+            return false;
+        return true;
+    }
 }
