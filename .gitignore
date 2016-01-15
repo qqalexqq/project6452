@@ -1,3 +1,5 @@
+src/main/java/cc/ntechnologies/Config.java
+
 *.class
 
 # Mobile Tools for Java (J2ME)
